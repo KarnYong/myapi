@@ -20,4 +20,14 @@ app.get('/attractions', function(req, res, next) {
   )
 })
 
+app.get('/attractions/:id', function(req, res, next) {
+  const id = req.params.id
+  connection.query(
+    'SELECT * FROM attractions WHERE id = ?',
+    [id], function(err, results, fields) {
+      res.json(results[0])
+    }
+  )
+})
+
 app.listen(process.env.PORT || 3000)
